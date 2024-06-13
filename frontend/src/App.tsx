@@ -3,6 +3,8 @@ import React, { useState, useRef } from 'react'
 import Header from './component/Header'
 import Writer from './component/Writer'
 import Todolist from './component/Todolist'
+import  { ItemInput } from './network/item_api'
+import  * as ItemApi from './network/item_api'
 
 
 interface TodoItemProps {
@@ -13,52 +15,57 @@ interface TodoItemProps {
 }
 
 
-const mockTodo: TodoItemProps[] = [
-  {
-    id: 0,
-    isDone: false,
-    content: "Studying React",
-    createDate: new Date().getTime(),
-  },
-  {
-    id: 1,
-    isDone: false,
-    content: "Lundurying",
-    createDate: new Date().getTime(),
-  },
-  {
-    id: 2,
-    isDone: true,
-    content: "FastAPI",
-    createDate: new Date().getTime(),
-  }
+// const mockTodo: TodoItemProps[] = [
+//   {
+//     id: 0,
+//     isDone: false,
+//     content: "Studying React",
+//     // createDate: new Date().getTime(),
+//   },
+//   {
+//     id: 1,
+//     isDone: false,
+//     content: "Lundurying",
+//     // createDate: new Date().getTime(),
+//   },
+//   {
+//     id: 2,
+//     isDone: true,
+//     content: "FastAPI",
+//     // createDate: new Date().getTime(),
+//   }
+
+// ]
 
 
-
-]
 function App() {
   // Create todo
   const idRef = useRef(0);
   const [todo, setTodo] = useState<TodoItemProps[]>([]);
 
-  const onCreate = (content: string) => {
-
-    const newItem: TodoItemProps = {
-    id: idRef.current,
-    isDone: false,
-    content,
-    createDate: new Date().getTime(),
+  const onCreate = async (content: string) => {
+    const newItem: ItemInput = {
+      id: idRef.current,
+      isDone: false,
+      content,
+      createDate: new Date().getTime(),
     };
 
-    if (!todo) {
-      setTodo([newItem]);
-      idRef.current += 1
-    } else {
-    setTodo([newItem, ...todo]);
-    idRef.current += 1
+    try {
+      const createdItem = await ItemApi.createItem(newItem);
+      
+      setTodo([{
+        id: createdItem.id,
+        isDone: false,
+        content: createdItem.content,
+        createDate: createdItem.createDate,
+      }, ...todo]);
+      
+      idRef.current += 1;
+    } catch (error) {
+      console.error('Error creating item:', error);
     }
   };
-
 
 
 
@@ -82,8 +89,6 @@ function App() {
   const onDelete = (targetId: number) => {
       setTodo( todo.filter( (it) => it.id !==targetId ));
   };
-
-    
 
 
 

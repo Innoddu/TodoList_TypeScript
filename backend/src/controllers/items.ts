@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import mongoose from "mongoose";
 import createHttpError from "http-errors";
 import ItemModel from "../models/item";
+import { createDeflate } from "zlib";
 
 export const getItems: RequestHandler = async (req, res, next) => {
     try {
@@ -13,8 +14,10 @@ export const getItems: RequestHandler = async (req, res, next) => {
 };
 
 interface CreateItemBody {
-    complete?: boolean,
+    id: number,
+    isDone?: boolean,
     content: string,
+    createDate: number,
 }
 
 // RequestHandler<unknown, unknown, CreateItemBody, unknown>:
@@ -24,15 +27,20 @@ interface CreateItemBody {
 // 3. req.body => define the type of body using interface that I created above
 // 4. req.query => unkown
 export const createItems: RequestHandler<unknown, unknown, CreateItemBody, unknown> = async (req, res, next) => {
-    const complete = req.body.complete;
+    const id = req.body.id;
+    const isDone = req.body.isDone;
     const content = req.body.content;
+    const creatDate = req.body.createDate;
+
     try {
         if (!content) {
             throw createHttpError(400, "Must include Content");
         }
         const newItem = await ItemModel.create( {
-            complete: complete,
+            id: id,
+            isDone: isDone,
             content: content,
+            creatDate: creatDate,
         });
         res.status(200).json(newItem);
     } catch (error) {
