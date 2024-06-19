@@ -1,16 +1,30 @@
+@font-face {
+  font-family: '양진체';
+  src: url('https://fastly.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 body {
-  background-color: rgb(200, 198, 221);
+  font-family: '양진체';
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+  margin-bottom: 800px;
+  
 }
 .App {
-  max-width: 700px;
+  max-width: 900px;
+  max-height: 900px;
   width: 100%;
+  height: 100%;
+
   margin: 100px auto;
   box-sizing: border-box;
-  padding: 20px;
-  border: 1px solid rgb(235, 232, 232);
+  padding: 30px;
+  border: 1px solid rgb(175, 177, 209);
   border-radius: 50px;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  background-color: rgb(232, 232, 236);
+  /* background-image: rgb(72, 78, 80)(to top, #30cfd0 0%, #330867 30%); */
 }

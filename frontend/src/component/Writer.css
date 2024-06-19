@@ -1,15 +1,25 @@
+.Writer {
+    /* color: #ca5540; */
+    color: rgb(190, 106, 158);
+}
+
+
 .Writer .editor_wrapper {
     width: 100%;
     display: flex;
     gap: 10px;
+    
+    
 }
 
 .Writer input {
     flex: 1;
     box-sizing: border-box;
     border: 1px solid rgb(220, 220, 220);
-    border-radius: 5px;
+    background-color: rgb(208, 208, 221);
+    border-radius: 15px;
     padding: 15px;
+    
 }
 
 .Writer input:focus {
@@ -21,7 +31,8 @@
     cursor: pointer;
     width: 80px;
     border: none;
-    background-color: #1f93ff;
-    color: white;
-    border-radius: 5px;
+    background-color: #7e8fe4;
+    font-size: 15px;
+    color: black;
+    border-radius: 15px;
 }

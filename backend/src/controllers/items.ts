@@ -30,7 +30,7 @@ export const createItems: RequestHandler<unknown, unknown, CreateItemBody, unkno
     const id = req.body.id;
     const isDone = req.body.isDone;
     const content = req.body.content;
-    const creatDate = req.body.createDate;
+    const createDate = req.body.createDate;
 
     try {
         if (!content) {
@@ -40,7 +40,7 @@ export const createItems: RequestHandler<unknown, unknown, CreateItemBody, unkno
             id: id,
             isDone: isDone,
             content: content,
-            creatDate: creatDate,
+            createDate: createDate,
         });
         res.status(200).json(newItem);
     } catch (error) {

@@ -1,9 +1,18 @@
 .Todoitem {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding-bottom: 20px;
+    gap: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
     border-bottom: 1px solid rgb(240,240,240);
+    border-radius: 15px;
+    /* background-image: linear-gradient(to top, #bbbbbb 0%, #634494 100%); */
+    /* background-color: rgb(189, 200, 211); */
+    background-color: #c4c7d6;
+    color:rgb(5, 22, 66);
+    
 }
 
 .Todoitem .checkbox_col {
@@ -12,18 +21,21 @@
 
 .Todoitem .title_col {
     flex: 1;
+    font-size: 20px;
 }
 
 .Todoitem .date_col {
-    font-size: 14px;
+    font-size: 16px;
     color: grey;
 }
 
 .Todoitem .btn_col button {
     cursor: pointer;
-    color: grey;
+    color: rgb(59, 2, 2);
+    background-color: rgb(208, 214, 223);
     font-size: 14px;
     border: none;
-    border-radius: 5px;
-    padding: 5px;
+    border-radius: 10px;
+    padding: 7px;
+
 }

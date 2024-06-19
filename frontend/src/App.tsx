@@ -1,47 +1,39 @@
 import './App.css';
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Header from './component/Header'
 import Writer from './component/Writer'
 import Todolist from './component/Todolist'
 import  { ItemInput } from './network/item_api'
 import  * as ItemApi from './network/item_api'
+import { Item as ItemModel } from './models/item'
 
 
-interface TodoItemProps {
-  id: number;
-  isDone: boolean;
-  content: string;
-  createDate: number;
-}
+// interface TodoItemProps {
+//   id: number;
+//   isDone: boolean;
+//   content: string;
+//   createDate: number;
+// }
 
-
-// const mockTodo: TodoItemProps[] = [
-//   {
-//     id: 0,
-//     isDone: false,
-//     content: "Studying React",
-//     // createDate: new Date().getTime(),
-//   },
-//   {
-//     id: 1,
-//     isDone: false,
-//     content: "Lundurying",
-//     // createDate: new Date().getTime(),
-//   },
-//   {
-//     id: 2,
-//     isDone: true,
-//     content: "FastAPI",
-//     // createDate: new Date().getTime(),
-//   }
-
-// ]
 
 
 function App() {
   // Create todo
   const idRef = useRef(0);
-  const [todo, setTodo] = useState<TodoItemProps[]>([]);
+  const [todo, setTodo] = useState<ItemModel[]>([]);
+
+  useEffect( () => {
+    async function loadItems() {
+      try {
+        const items = await ItemApi.fetchItems();
+        setTodo(items);
+        idRef.current = items.length ? Math.max(...items.map(item => item.id)) + 1 : 0;
+      } catch (error) {
+        console.error(error);
+      } 
+    }
+    loadItems();
+  }, []);
 
   const onCreate = async (content: string) => {
     const newItem: ItemInput = {
@@ -54,12 +46,7 @@ function App() {
     try {
       const createdItem = await ItemApi.createItem(newItem);
       
-      setTodo([{
-        id: createdItem.id,
-        isDone: false,
-        content: createdItem.content,
-        createDate: createdItem.createDate,
-      }, ...todo]);
+      setTodo([createdItem, ...todo]);
       
       idRef.current += 1;
     } catch (error) {
@@ -96,7 +83,7 @@ function App() {
     <div className="App">
           <Header />
           <Writer onCreate={onCreate}/>
-          <Todolist todo={todo} onUpdate={onUpdate} onDelete={onDelete}/>
+          <Todolist items={todo} onUpdate={onUpdate} onDelete={onDelete}/>
     </div>
   );
 }

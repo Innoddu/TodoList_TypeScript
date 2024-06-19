@@ -1,4 +1,11 @@
 .Header h1 {
     margin-bottom: 0px;
-    color: #1f93ff;
+    /* color: #3280c9; */
+    color: #7e8fe4;
+
+}
+
+.Header h3 {
+    font-size: 20px;
+    color: rgb(190, 106, 158);
 }

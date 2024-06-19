@@ -1,22 +1,16 @@
 import { ChangeEvent, useState } from "react";
+import {Item, Item as ItemModel} from "../models/item";
 import Todoitem from './Todoitem';
 import './Todolist.css'
 
 interface TodoItemProps {
-    id: number;
-    isDone: boolean;
-    content: string;
-    createDate: number;
-  }
-
-interface TodoListProps {
-    todo: TodoItemProps[];
+    items: ItemModel[];
     onUpdate: (id: number) => void;
     onDelete: (id: number) => void;
-}
+  }
 
 
-const Todolist = ({ todo, onUpdate, onDelete } : TodoListProps) => {
+const Todolist = ({ items, onUpdate, onDelete } : TodoItemProps) => {
 
     // Filtering User Input
     const [search, setSearch] = useState("");
@@ -25,8 +19,9 @@ const Todolist = ({ todo, onUpdate, onDelete } : TodoListProps) => {
     };
     const getSearchResult = () => {
         return search === "" 
-        ? todo
-        : todo.filter((it) =>  it.content.toLowerCase().includes(search.toLowerCase()));
+        ? items
+        // : todo.filter((it: ItemModel) =>  it.content.toLowerCase().includes(search.toLowerCase()));
+        : items.filter(item => {item.content.toLowerCase().includes(search.toLowerCase())})
     };
 
     return (
@@ -38,16 +33,10 @@ const Todolist = ({ todo, onUpdate, onDelete } : TodoListProps) => {
             className="TodoSearch"
             placeholder="Type..." />
             <div className='list_wrapper'>
-                {/* {
-                    todo.map( (it) => (<Todoitem key={it.id} {...it} onUpdate={onUpdate} onDelete={onDelete} />))
-                } */}
                 {
-                /* Read Rendering to Todoitem itereate through todo props */
-                /* key value is unique id */
-    
-                // Get Search
-                getSearchResult().map( (it) => (<Todoitem key={it.id} {...it} onUpdate={onUpdate} onDelete={onDelete} />))
-                   
+                    getSearchResult().map( (item: ItemModel) => (
+                        <Todoitem key={item.id} items={item} onUpdate={onUpdate} onDelete={onDelete}/>
+                    ))
                 }
           
               

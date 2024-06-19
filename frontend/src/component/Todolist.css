@@ -1,11 +1,18 @@
+.Todolist h4{
+    /* color: #ca5540; */
+    color: rgb(190, 106, 158);
+}
 .Todolist .TodoSearch{
     margin-bottom: 20px;
     width: 100%;
     border: none;
     border-bottom: 1px solid rgb(220, 220, 220);
+    border: 1px solid rgb(220, 220, 220);
     box-sizing: border-box;
     padding-top: 15px;
     padding-bottom: 15px;
+    border-radius: 15px;
+    background-color: rgb(208, 208, 221);
 }
 
 .Todolist input:focus {
@@ -17,4 +24,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    /* color: rgb(190, 106, 158); */
+
 }

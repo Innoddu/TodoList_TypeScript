@@ -1,15 +1,18 @@
 import './Todoitem.css'
-
+import {Item as ItemModel} from "../models/item";
 interface TodoItemProps {
-    id: number;
-    content: string;
-    isDone: boolean;
-    createDate: number;
+    items: ItemModel;
     onUpdate: (id: number) => void;
     onDelete: (id: number) => void;
 }
 
-const Todoitem = ( { id, content, isDone, createDate, onUpdate, onDelete } : TodoItemProps) => {
+const Todoitem = ( { items, onUpdate, onDelete } : TodoItemProps) => {
+    const {
+        id,
+        isDone,
+        content,
+        createDate,
+    } = items;
     const onChangeCheckBox = () => {
         onUpdate(id);
     }
