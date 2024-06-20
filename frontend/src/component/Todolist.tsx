@@ -4,13 +4,13 @@ import Todoitem from './Todoitem';
 import './Todolist.css'
 
 interface TodoItemProps {
-    items: ItemModel[];
-    onUpdate: (id: number) => void;
-    onDelete: (id: number) => void;
+    item: ItemModel[];
+    onUpdate: (_id: string) => void;
+    onDelete: (_id: string) => void;
   }
 
 
-const Todolist = ({ items, onUpdate, onDelete } : TodoItemProps) => {
+const Todolist = ({ item, onUpdate, onDelete } : TodoItemProps) => {
 
     // Filtering User Input
     const [search, setSearch] = useState("");
@@ -19,9 +19,9 @@ const Todolist = ({ items, onUpdate, onDelete } : TodoItemProps) => {
     };
     const getSearchResult = () => {
         return search === "" 
-        ? items
+        ? item
         // : todo.filter((it: ItemModel) =>  it.content.toLowerCase().includes(search.toLowerCase()));
-        : items.filter(item => {item.content.toLowerCase().includes(search.toLowerCase())})
+        : item.filter(item => item.content.toLowerCase().includes(search.toLowerCase()));
     };
 
     return (
@@ -35,7 +35,7 @@ const Todolist = ({ items, onUpdate, onDelete } : TodoItemProps) => {
             <div className='list_wrapper'>
                 {
                     getSearchResult().map( (item: ItemModel) => (
-                        <Todoitem key={item.id} items={item} onUpdate={onUpdate} onDelete={onDelete}/>
+                        <Todoitem key={item._id} item={item} onUpdate={onUpdate} onDelete={onDelete}/>
                     ))
                 }
           

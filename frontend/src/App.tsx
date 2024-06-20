@@ -27,7 +27,7 @@ function App() {
       try {
         const items = await ItemApi.fetchItems();
         setTodo(items);
-        idRef.current = items.length ? Math.max(...items.map(item => item.id)) + 1 : 0;
+  
       } catch (error) {
         console.error(error);
       } 
@@ -57,10 +57,10 @@ function App() {
 
 
   // Toggle Update 
-  const onUpdate = (targetId: number) => {
+  const onUpdate = (_id: string) => {
     setTodo(
       todo.map( (it) => {
-        if (it.id === targetId) {
+        if (it._id === _id) {
           return {
             ...it,
             isDone: !it.isDone,
@@ -72,10 +72,22 @@ function App() {
     );
   };
 
+
+  async function onDelete(_id: string) {
+    try {
+      await ItemApi.deleteItem(_id);
+      setTodo( todo.filter( it => it._id !== _id));
+    } catch (error) {
+      console.error("delete error");
+      alert(error);
+    }
+  }
+
+
   // Delete Todo
-  const onDelete = (targetId: number) => {
-      setTodo( todo.filter( (it) => it.id !==targetId ));
-  };
+  // const onDelete = (targetId: number) => {
+  //     setTodo( todo.filter( (it) => it.id !==targetId ));
+  // };
 
 
 
@@ -83,7 +95,7 @@ function App() {
     <div className="App">
           <Header />
           <Writer onCreate={onCreate}/>
-          <Todolist items={todo} onUpdate={onUpdate} onDelete={onDelete}/>
+          <Todolist item={todo} onUpdate={onUpdate} onDelete={onDelete}/>
     </div>
   );
 }

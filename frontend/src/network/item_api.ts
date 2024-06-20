@@ -34,3 +34,7 @@ export async function createItem(item: ItemInput): Promise<Item> {
     }
 
 };
+
+export async function deleteItem(itemId: string) { 
+    await await axios.post("http://localhost:5005/api/items/" + itemId);
+}

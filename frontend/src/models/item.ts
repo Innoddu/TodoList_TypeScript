@@ -1,5 +1,5 @@
 export interface Item {
-    id: number,
+    _id: string,
     isDone?: boolean,
     content: string,
     createDate: number,

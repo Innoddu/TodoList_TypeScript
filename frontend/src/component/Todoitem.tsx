@@ -1,23 +1,27 @@
 import './Todoitem.css'
 import {Item as ItemModel} from "../models/item";
 interface TodoItemProps {
-    items: ItemModel;
-    onUpdate: (id: number) => void;
-    onDelete: (id: number) => void;
+    item: ItemModel;
+    onUpdate: (_id: string) => void;
+    onDelete: (_id: string) => void;
 }
 
-const Todoitem = ( { items, onUpdate, onDelete } : TodoItemProps) => {
+const Todoitem = ( { item, onUpdate, onDelete } : TodoItemProps) => {
     const {
-        id,
+        _id,
         isDone,
         content,
         createDate,
-    } = items;
+    } = item;
     const onChangeCheckBox = () => {
-        onUpdate(id);
+        onUpdate(_id);
     }
     const onChangeDelete = () => {
-        onDelete(id);
+        const confirmDelete = window.confirm(`Are you sure to delete "${content}" ?`);
+        if (confirmDelete){
+            onDelete(_id);
+        }
+        
     }
     return (
         <div className="Todoitem">
