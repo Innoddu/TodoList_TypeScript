@@ -3,7 +3,7 @@
 </div>
 <br>
 <p align="center">
- <img width="480" height="340" alt="TodoListImage" src="https://github.com/Innoddu/TodoList_TypeScript/assets/70001944/29d7ad74-0a97-4eac-bbba-688404e72c6d">
+ <img width="480" alt="Screenshot 2024-06-20 at 11 37 43 AM Large" src="https://github.com/Innoddu/TodoList_TypeScript/assets/70001944/bc5ea740-c6ca-47c3-af40-18fe706258d0">
 </p>
 <div align="center">
   <h1>Key Features</h1>
