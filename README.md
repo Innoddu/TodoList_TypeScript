@@ -3,7 +3,7 @@
 </div>
 <br>
 <p align="center">
-<img width="320" alt="TodoListImage" src="https://github.com/Innoddu/TodoList_React/assets/70001944/d10c239d-d743-45d5-bc50-31ce1f5ec963">
+ <img width="480" height="340" alt="TodoListImage" src="https://github.com/Innoddu/TodoList_TypeScript/assets/70001944/29d7ad74-0a97-4eac-bbba-688404e72c6d">
 </p>
 <div align="center">
   <h1>Key Features</h1>
@@ -24,7 +24,7 @@
   <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">  
   <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
   <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
-  <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
   <br>
   <img src="https://img.shields.io/badge/node.js-5FA04E?style=for-the-badge&logo=node.js&logoColor=white"> 
   <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express-000000&logoColor=white">
