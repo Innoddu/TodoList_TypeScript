@@ -4,9 +4,10 @@ interface TodoItemProps {
     item: ItemModel;
     onUpdate: (_id: string) => void;
     onDelete: (_id: string) => void;
+    onComplete: (_id: string) => void;
 }
 
-const Todoitem = ( { item, onUpdate, onDelete } : TodoItemProps) => {
+const Todoitem = ( { item, onUpdate, onDelete, onComplete } : TodoItemProps) => {
     const {
         _id,
         isDone,
@@ -23,6 +24,13 @@ const Todoitem = ( { item, onUpdate, onDelete } : TodoItemProps) => {
         }
         
     }
+    const onChangeComplete = () => {
+        if (!isDone) {
+            window.confirm(`You should complete "${content}" task!`);
+        } else {
+            onComplete(_id);
+        }
+    }
     return (
         <div className="Todoitem">
             <div className="checkbox_col">
@@ -33,9 +41,9 @@ const Todoitem = ( { item, onUpdate, onDelete } : TodoItemProps) => {
             </div>
             <div className='title_col'>{content}</div>
             <div className='date_col'>{new Date(createDate).toLocaleDateString()}</div>
-            <div className='btn_col'>
-                <button onClick={onChangeDelete}>Delete</button>
-            </div>
+            <div className='btn_col'><button onClick={onChangeComplete}>Complete</button></div>
+            <div className='btn_col'><button onClick={onChangeDelete}>Delete</button></div>
+           
         </div>
     );
 }

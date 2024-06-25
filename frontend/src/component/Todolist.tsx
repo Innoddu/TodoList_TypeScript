@@ -7,10 +7,11 @@ interface TodoItemProps {
     item: ItemModel[];
     onUpdate: (_id: string) => void;
     onDelete: (_id: string) => void;
+    onComplete: (_id: string) => void;
   }
 
 
-const Todolist = ({ item, onUpdate, onDelete } : TodoItemProps) => {
+const Todolist = ({ item, onUpdate, onDelete, onComplete } : TodoItemProps) => {
 
     // Filtering User Input
     const [search, setSearch] = useState("");
@@ -35,7 +36,7 @@ const Todolist = ({ item, onUpdate, onDelete } : TodoItemProps) => {
             <div className='list_wrapper'>
                 {
                     getSearchResult().map( (item: ItemModel) => (
-                        <Todoitem key={item._id} item={item} onUpdate={onUpdate} onDelete={onDelete}/>
+                        <Todoitem key={item._id} item={item} onUpdate={onUpdate} onDelete={onDelete} onComplete={onComplete}/>
                     ))
                 }
           

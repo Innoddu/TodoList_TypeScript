@@ -35,6 +35,18 @@ export async function createItem(item: ItemInput): Promise<Item> {
 
 };
 
+export async function completeItem(itemId: string) {
+    try {
+        console.log(itemId);
+        const response = await axios.patch("http://localhost:5005/api/items/" +itemId);
+        return response.data;
+     
+    } catch (error) {
+        console.error("Error complete item", error);
+        throw error;
+    }
+}
+
 export async function deleteItem(itemId: string) { 
-    await await axios.post("http://localhost:5005/api/items/" + itemId);
+    await axios.post("http://localhost:5005/api/items/" + itemId);
 }

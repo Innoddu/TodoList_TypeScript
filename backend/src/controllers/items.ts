@@ -49,6 +49,28 @@ export const createItems: RequestHandler<unknown, unknown, CreateItemBody, unkno
 
 };
 
+export const completeItem: RequestHandler = async(req, res, next) => {
+    const itemId = req.params.itemId;
+    console.log(itemId);
+    try {
+        if (!mongoose.isValidObjectId(itemId)) {
+            throw createHttpError(400, "Invalid Item Id");
+        }
+        const item = await ItemModel.findById(itemId).exec();
+        if (!item) {
+            throw createHttpError(400, "Item Not Found");
+        }
+        const result = await ItemModel.updateOne(
+            {_id: itemId},
+            {$set : {isDone: true}}
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    };
+}
+
+
 export const deleteItem: RequestHandler = async(req, res, next) => {
     const itemId = req.params.itemId;
 

@@ -73,6 +73,21 @@ function App() {
   };
 
 
+  async function onComplete(_id: string) {
+    try {
+      await ItemApi.completeItem(_id);
+      setTodo( todo.filter(
+        it => it._id !== _id
+      ));
+    } catch (error) {
+      console.error("Complete error");
+      alert(error);
+    }
+  }
+
+
+
+
   async function onDelete(_id: string) {
     try {
       await ItemApi.deleteItem(_id);
@@ -95,7 +110,7 @@ function App() {
     <div className="App">
           <Header />
           <Writer onCreate={onCreate}/>
-          <Todolist item={todo} onUpdate={onUpdate} onDelete={onDelete}/>
+          <Todolist item={todo} onUpdate={onUpdate} onDelete={onDelete} onComplete={onComplete} />
     </div>
   );
 }
