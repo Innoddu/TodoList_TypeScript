@@ -12,6 +12,10 @@ app.use(morgan("dev"));
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.redirect("/api/items");
+});
+
 app.use("/api/items", ItemRoutes);
 
 app.use( (req, res, next) => {
