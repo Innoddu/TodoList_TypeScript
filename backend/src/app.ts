@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response} from "express";
 import ItemRoutes from "./routes/items";
 import createHttpError, { isHttpError } from "http-errors";
 import morgan from "morgan";
+import path from "path";
 
 const app = express();
 const cors = require('cors');
@@ -17,6 +18,12 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/items", ItemRoutes);
+
+app.use(express.static(path.join(__dirname, "../../frontend/build")));
+
+app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
+});
 
 app.use( (req, res, next) => {
     next(createHttpError(404, "Endpint Not Found"));
