@@ -8,7 +8,8 @@
     "start": "cd backend && npm start",
     "heroku-postbuild": "npm run build:backend && npm run build:frontend",
     "build:backend": "cd backend && npm install && npm run build",
-    "build:frontend": "cd frontend && npm install && npm run build"
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "postinstall": "cd backend && npm install"
   },
   "keywords": [],
   "author": "",
