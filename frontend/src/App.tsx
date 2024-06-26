@@ -21,7 +21,10 @@ function App() {
   // Create todo
   const idRef = useRef(0);
   const [todo, setTodo] = useState<ItemModel[]>([]);
+  const newItemRef = useRef<HTMLDivElement>(null);
+  const [newItemId, setNewItemId] = useState<string | null>(null);
 
+ //  Render current todo list
   useEffect( () => {
     async function loadItems() {
       try {
@@ -35,6 +38,7 @@ function App() {
     loadItems();
   }, []);
 
+
   const onCreate = async (content: string) => {
     const newItem: ItemInput = {
       id: idRef.current,
@@ -42,12 +46,12 @@ function App() {
       content,
       createDate: new Date().getTime(),
     };
-
+  
     try {
       const createdItem = await ItemApi.createItem(newItem);
-      
-      setTodo([createdItem, ...todo]);
-      
+      setTodo(prevTodo => [createdItem, ...prevTodo]);
+      setNewItemId(createdItem._id); // 새로 추가된 항목의 ID를 저장
+      setTimeout( () => setNewItemId(null), 10);
       idRef.current += 1;
     } catch (error) {
       console.error('Error creating item:', error);
@@ -110,7 +114,7 @@ function App() {
     <div className="App">
           <Header />
           <Writer onCreate={onCreate}/>
-          <Todolist item={todo} onUpdate={onUpdate} onDelete={onDelete} onComplete={onComplete} />
+          <Todolist item={todo} onUpdate={onUpdate} onDelete={onDelete} onComplete={onComplete} newItemId={newItemId} />
     </div>
   );
 }

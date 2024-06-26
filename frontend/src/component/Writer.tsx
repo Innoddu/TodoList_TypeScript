@@ -8,7 +8,6 @@ interface WriterProps {
 
 
 const Writer = ({ onCreate } : WriterProps) => {
-
     const [textTodo, setTextTodo] = useState("");
 
     // User input todo

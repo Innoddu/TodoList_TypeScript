@@ -6,7 +6,7 @@ import { createDeflate } from "zlib";
 
 export const getItems: RequestHandler = async (req, res, next) => {
     try {
-        const items = await ItemModel.find().exec();
+        const items = await ItemModel.find({ isDone: false }).exec();
         res.status(200).json(items);
     } catch (error) {
         next(error);

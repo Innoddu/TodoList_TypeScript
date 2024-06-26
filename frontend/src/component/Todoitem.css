@@ -12,6 +12,8 @@
     /* background-color: rgb(189, 200, 211); */
     background-color: #c4c7d6;
     color:rgb(5, 22, 66);
+    /* transition: transform 0.5s ease, opacity 0.5s ease;
+    position: relative; */
     
 }
 
@@ -29,7 +31,7 @@
     color: grey;
 }
 
-.Todoitem .btn_col button {
+.Todoitem button {
     cursor: pointer;
     color: rgb(59, 2, 2);
     background-color: rgb(208, 214, 223);
@@ -39,3 +41,27 @@
     padding: 7px;
 
 }
+.Todoitem .btn_col_complete button:hover {
+    background-color: #7e8fe4;
+}
+
+.Todoitem .btn_col_delete button:hover {
+    background-color: rgb(188, 95, 211);
+}
+.Todoitem.completing {
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.Todoitem-container {
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+    overflow: hidden;
+    max-height: 100px; /* 적절한 높이로 조정 */
+    opacity: 1;
+}
+
+.new-item {
+    max-height: 0;
+    opacity: 0;
+  }
