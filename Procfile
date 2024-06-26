@@ -1,1 +1,1 @@
-web: node server/index.js
+web: npm run heroku-postbuild && npm start
