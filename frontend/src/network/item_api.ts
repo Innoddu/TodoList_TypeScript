@@ -1,6 +1,8 @@
 import { Item } from "../models/item";
 import axios from 'axios';
 
+const BASE_URL = 'https://app-todolist-395378bec3eb.herokuapp.com';
+
 async function fetchData<T>(url: string): Promise<T> {
     try {
         const response = await axios.get<T>(url);
@@ -12,7 +14,7 @@ async function fetchData<T>(url: string): Promise<T> {
 }
   
   export async function fetchItems(): Promise<Item[]> {
-    return await fetchData<Item[]>("http://localhost:5005/api/items");
+    return await fetchData<Item[]>(`${BASE_URL}/api/items`);
 
 }
 
