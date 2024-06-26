@@ -1,1 +1,1 @@
-web: npm run build:backend && npm run build:frontend && npm start
+web: node server/index.js
