@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import env from './util/validateEnv';
 
 
-const PORT = env.PORT;
+const PORT = process.env.PORT || env.PORT || 3000;
 const mongoConnectionString = env.MONGO_CONNECTION_STRING;
 
 
