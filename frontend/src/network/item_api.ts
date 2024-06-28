@@ -1,25 +1,58 @@
 import { Item } from "../models/item";
+import { User } from "../models/user";
 import axios from 'axios';
 
-const BASE_URL = 'https://app-todolist-395378bec3eb.herokuapp.com';
+// Heroku base url
+// const BASE_URL = 'http://localhost:5005';
+const BASE_URL = 'https://app-todolist-395378bec3eb.herokuapp.com' || 'http://localhost:5005/api/items';
+
+
 
 async function fetchData<T>(url: string): Promise<T> {
     try {
-        const response = await axios.get<T>(url);
+        const response = await axios.get<T>(url,  { withCredentials: true });
         return response.data;
     } catch (error) {
         console.error('Error fetching data!!!!!:', error);
         throw error;
     }
 }
-  
-  export async function fetchItems(): Promise<Item[]> {
-    return await fetchData<Item[]>(`${BASE_URL}/api/items`);
 
+export async function fetchItems(): Promise<Item[]> {
+    return await fetchData<Item[]>("http://localhost:5005/api/items");
+
+}
+export async function getLoggedInUser(): Promise<User> {
+    return await fetchData<User>("http://localhost:5005/api/users");
+}
+
+export interface SignUpCredentials {
+    username: string,
+    email: string,
+    password: string,
+}
+
+export async function signUp(credentials: SignUpCredentials): Promise<User> {
+    const response = await axios.post("http://localhost:5005/api/users/signup", credentials, {withCredentials: true });
+    return response.data;
+}
+
+export interface LoginCredentials {
+    username: string,
+    password: string,
+}
+
+export async function login(credentials: LoginCredentials) {
+    const response = await axios.post("http://localhost:5005/api/users/login", credentials, {withCredentials: true });
+    return response.data;
+}
+
+export async function logout() {
+    await axios.post("http://localhost:5005/api/users/logout")
+    
 }
 
 export interface ItemInput {
-    id: number,
     isDone: boolean,
     content: string,
     createDate: number,
@@ -27,7 +60,9 @@ export interface ItemInput {
 
 export async function createItem(item: ItemInput): Promise<Item> {
     try {
-        const response = await axios.post("http://localhost:5005/api/items", item);
+        console.log('Sending item:', item);
+        const response = await axios.post("http://localhost:5005/api/items", item, {withCredentials: true });
+        console.log('Response received:', response.data);
         return response.data;
     
     } catch (error) {
@@ -40,7 +75,7 @@ export async function createItem(item: ItemInput): Promise<Item> {
 export async function completeItem(itemId: string) {
     try {
         console.log(itemId);
-        const response = await axios.patch("http://localhost:5005/api/items/" +itemId);
+        const response = await axios.patch("http://localhost:5005/api/items" + itemId);
         return response.data;
      
     } catch (error) {
@@ -50,5 +85,5 @@ export async function completeItem(itemId: string) {
 }
 
 export async function deleteItem(itemId: string) { 
-    await axios.post("http://localhost:5005/api/items/" + itemId);
+    await axios.delete("http://localhost:5005/api/items" + itemId);
 }

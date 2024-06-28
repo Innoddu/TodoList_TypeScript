@@ -15,7 +15,7 @@ const Writer = ({ onCreate } : WriterProps) => {
         setTextTodo(e.target.value);
     };
     
-    const inputRef =  useRef<HTMLInputElement | null>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const onSubmit = () => {
         console.log("onSubmit called with textTodo:", textTodo); // 디버그용 로그 추가
         // If the input is empty, can't add in the list

@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import {Item, Item as ItemModel} from "../models/item";
+import { Item as ItemModel} from "../models/item";
 import Todoitem from './Todoitem';
 import './Todolist.css'
 
@@ -20,12 +20,26 @@ const Todolist = ({ item, onUpdate, onDelete, onComplete, newItemId } : TodoItem
     const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
     };
+    // const getSearchResult = () => {
+    //     return search === "" 
+    //     ? item
+    //     // : todo.filter((it: ItemModel) =>  it.content.toLowerCase().includes(search.toLowerCase()));
+    //     : item.filter(item => item.content.toLowerCase().includes(search.toLowerCase()));
+    // };
     const getSearchResult = () => {
-        return search === "" 
-        ? item
-        // : todo.filter((it: ItemModel) =>  it.content.toLowerCase().includes(search.toLowerCase()));
-        : item.filter(item => item.content.toLowerCase().includes(search.toLowerCase()));
+        console.log('Type of item:', typeof item); // item의 타입을 출력
+        console.log('Is item an array?', Array.isArray(item)); // item이 배열인지 확인
+        console.log('Item content:', item); // item의 내용을 출력
+        if (!Array.isArray(item)) {
+            console.error('Item is not an array:', item);
+            return [];
+        }
+
+        return search === ""
+            ? item
+            : item.filter((item: ItemModel) => item.content.toLowerCase().includes(search.toLowerCase()));
     };
+    
 
     return (
         <div className="Todolist">

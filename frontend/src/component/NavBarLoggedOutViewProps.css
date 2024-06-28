@@ -1,0 +1,23 @@
+.navButton {
+    display: flex;
+    gap: 20px; /* 버튼 사이의 간격을 10px로 설정 */
+}
+.navButton Button {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 8px;
+    padding-top: 5px;
+    background-color: #7e8fe4;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+/* .navButton .login {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #7e8fe4;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+} */

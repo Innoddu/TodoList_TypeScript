@@ -9,7 +9,7 @@ router.post("/", ItemController.createItems);
 
 router.patch("/:itemId", ItemController.completeItem);
 
-router.post("/:itemId", ItemController.deleteItem);
+router.delete("/:itemId", ItemController.deleteItem);
 
 
 

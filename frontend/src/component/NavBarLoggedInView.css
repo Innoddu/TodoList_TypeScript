@@ -1,0 +1,13 @@
+.navText {
+    display: flex;
+    gap: 10px;
+}
+
+.navText Button {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #7e8fe4;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
