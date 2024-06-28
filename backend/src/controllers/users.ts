@@ -4,7 +4,6 @@ import createHttpError from "http-errors";
 import bcrypt from 'bcrypt';
 
 export const getAuthenticatedUser: RequestHandler = async(req, res, next) => {
-    console.log("userId:", req.session.userId);
     try {
         const user = await UserModel.findById(req.session.userId).select("+email").exec();
         res.status(200).json(user);
