@@ -57,7 +57,7 @@ interface CreateItemBody {
 // 2. req.send() => unkown
 // 3. req.body => define the type of body using interface that I created above
 // 4. req.query => unkown
-export const createItems: RequestHandler<unknown, unknown, CreateItemBody, unknown> = async (req, res, next) => {
+export const createItem: RequestHandler<unknown, unknown, CreateItemBody, unknown> = async (req, res, next) => {
     const isDone = req.body.isDone;
     const content = req.body.content;
     const createDate = req.body.createDate;
@@ -88,8 +88,10 @@ export const completeItem: RequestHandler = async(req, res, next) => {
     const itemId = req.params.itemId;
     const authenticatedUserId = req.session.userId;
     console.log(itemId);
+
     try {
         assertIsDefined(authenticatedUserId);
+
         if (!mongoose.isValidObjectId(itemId)) {
             throw createHttpError(400, "Invalid Item Id");
         }

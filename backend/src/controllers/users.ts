@@ -39,13 +39,13 @@ export const createUser: RequestHandler<unknown, unknown, CreateUserBody, unknow
         // check duplicate username in our database
         const dupUsername = await UserModel.findOne({ username: username }).exec();
         if (dupUsername) {
-            throw createHttpError(409, "username is Already Exsists");
+            throw createHttpError(409, "username is already exsists");
         }
 
         // check duplicate email in our database
         const dupEmail = await UserModel.findOne({ email: email }).exec();
         if (dupEmail) {
-            throw createHttpError(409, "email is Already Exsists");
+            throw createHttpError(409, "email is already exsists");
         }
     
         const hashedPassword = await bcrypt.hash(passwordRaw, 10);
@@ -60,7 +60,12 @@ export const createUser: RequestHandler<unknown, unknown, CreateUserBody, unknow
         res.status(201).json(newUser);
 
     } catch (error) {
-        next(error);
+        if (error instanceof createHttpError.HttpError) {
+            res.status(error.statusCode).json({ message: error.message });
+            // next(error);
+        } else {
+            next(error);
+        }
     }
 
 };
@@ -70,7 +75,7 @@ interface LoginBody {
     password?: string,
 }
 
-export const login: RequestHandler<unknown, unknown, LoginBody, unknown> = async(req, res, next) => {
+export const login: RequestHandler<unknown, unknown, LoginBody, unknown> = async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -79,19 +84,28 @@ export const login: RequestHandler<unknown, unknown, LoginBody, unknown> = async
             throw createHttpError(400, "Parameters Missing");
         }
 
-        const user = await UserModel.findOne({username: username}).select("+password +email").exec();
+        const user = await UserModel.findOne({ username: username }).select("+password +email").exec();
+
         if (!user) {
-            throw createHttpError(401, "Invalid credentials");
+            throw createHttpError(401, "Invalid credentials (username)");
         }
+
         const passwordMatch = await bcrypt.compare(password, user.password);
+
         if(!passwordMatch) {
-            throw createHttpError(401, "Invalid credentials");
+            throw createHttpError(401, "Invalid credentials (Password)");
         }
 
         req.session.userId = user._id;
         res.status(201).json(user);
     } catch (error) {
-        next(error);
+    
+        if (error instanceof createHttpError.HttpError) {
+            res.status(error.statusCode).json({ message: error.message });
+            // next(error);
+        } else {
+            next(error);
+        }
     }
 }
 

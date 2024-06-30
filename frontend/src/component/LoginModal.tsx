@@ -2,8 +2,11 @@ import { useForm } from "react-hook-form";
 import {User} from "../models/user";
 import { LoginCredentials } from "../network/item_api";
 import * as ItemApi from "../network/item_api";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Alert } from "react-bootstrap";
 import TextInputField from "./form/TextInputField";
+import { useState } from "react";
+import { UnauthorizedError } from "../errors/http_errors";
+
 
 interface LoginModalProps {
     onDismiss: () => void,
@@ -11,7 +14,8 @@ interface LoginModalProps {
 }
 
 const LoginModal = ({ onDismiss, onLogInSuccessful }: LoginModalProps ) => {
-    
+    const [errorText, seterrorText] = useState<string | null>(null);
+
     const {register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginCredentials>();
 
     async function onSubmit(credentials: LoginCredentials) {
@@ -19,8 +23,12 @@ const LoginModal = ({ onDismiss, onLogInSuccessful }: LoginModalProps ) => {
             const user = await ItemApi.login(credentials);
             onLogInSuccessful(user);
         } catch (error) {
-            alert(error);
-            console.error(error);
+            if (error instanceof UnauthorizedError) {
+                seterrorText(error.message);
+            } else {
+                console.error(error);
+            }
+      
         }
     }
     const CustomModalHeader: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
@@ -32,6 +40,12 @@ const LoginModal = ({ onDismiss, onLogInSuccessful }: LoginModalProps ) => {
                    <Modal.Title>Log In</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                {
+                    errorText &&
+                    <Alert variant="danger">
+                        {errorText}    
+                    </Alert>
+                }
                 <Form onSubmit={handleSubmit(onSubmit)}>
                         <TextInputField
                             name="username"

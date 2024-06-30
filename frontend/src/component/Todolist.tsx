@@ -20,12 +20,7 @@ const Todolist = ({ item, onUpdate, onDelete, onComplete, newItemId } : TodoItem
     const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
     };
-    // const getSearchResult = () => {
-    //     return search === "" 
-    //     ? item
-    //     // : todo.filter((it: ItemModel) =>  it.content.toLowerCase().includes(search.toLowerCase()));
-    //     : item.filter(item => item.content.toLowerCase().includes(search.toLowerCase()));
-    // };
+
     const getSearchResult = () => {
         console.log('Type of item:', typeof item); // item의 타입을 출력
         console.log('Is item an array?', Array.isArray(item)); // item이 배열인지 확인

@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", ItemController.getItems);
 
-router.post("/", ItemController.createItems);
+router.post("/", ItemController.createItem);
 
 router.patch("/:itemId", ItemController.completeItem);
 

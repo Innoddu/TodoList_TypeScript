@@ -1,6 +1,8 @@
 import { Item } from "../models/item";
 import { User } from "../models/user";
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { response } from "express";
+import { ConflictError, UnauthorizedError } from "../errors/http_errors";
 
 // Heroku base url
 // const BASE_URL = 'http://localhost:5005';
@@ -9,12 +11,24 @@ const BASE_URL = 'https://app-todolist-395378bec3eb.herokuapp.com' || 'http://lo
 
 
 async function fetchData<T>(url: string): Promise<T> {
+    
     try {
-        const response = await axios.get<T>(url,  { withCredentials: true });
+        const response = await axios.get<T>(url, {withCredentials: true });
         return response.data;
-    } catch (error) {
-        console.error('Error fetching data!!!!!:', error);
-        throw error;
+    } catch (error: any) {
+        if (axios.isAxiosError(error) && error.response) {
+            const errorBody = error.response.data;
+            const errorMessage = errorBody.error || "An error occurred";
+            if (error.response.status === 401) {
+                throw new UnauthorizedError(errorMessage);
+            } else if (error.response.status === 409) {
+                throw new ConflictError(errorMessage);
+            } else {
+                throw new Error(`Request failed with status: ${error.response.status} message: ${errorMessage}`);
+            }
+        } else {
+            throw new Error("An unexpected error occurred");
+        }
     }
 }
 
@@ -33,8 +47,27 @@ export interface SignUpCredentials {
 }
 
 export async function signUp(credentials: SignUpCredentials): Promise<User> {
-    const response = await axios.post("http://localhost:5005/api/users/signup", credentials, {withCredentials: true });
-    return response.data;
+    try {
+        const response = await axios.post<User>(
+            "http://localhost:5005/api/users/signup",
+            credentials,
+            { withCredentials: true }
+        );
+        return response.data;
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            switch (error.response.status) {
+                case 409:
+                    throw new ConflictError(error.response.data.message || "Unauthorized");
+                default:
+                    throw new Error(error.response.data.message || 'An error occurred');
+            }
+        } else {Error
+            console.error(error);
+            throw new Error("An unknwon error occurred");
+        }
+    }
+
 }
 
 export interface LoginCredentials {
@@ -42,13 +75,36 @@ export interface LoginCredentials {
     password: string,
 }
 
-export async function login(credentials: LoginCredentials) {
-    const response = await axios.post("http://localhost:5005/api/users/login", credentials, {withCredentials: true });
-    return response.data;
+export async function login(credentials: LoginCredentials): Promise<User> {
+    try {
+        const response = await axios.post<User>(
+            "http://localhost:5005/api/users/login",
+            credentials,
+            { withCredentials: true }
+        );
+        return response.data;
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            console.error("Login error.resopnse:: ", error.response);
+            switch (error.response.status) {
+                case 401:
+                    throw new UnauthorizedError(error.response.data.message || 'Unauthorized');
+                default:
+                    throw new Error(error.response.data.message || 'An error occurred');
+            }
+        } else {Error
+            console.error(error);
+            throw new Error('An unknown error occurred');
+        }
+    }
 }
 
+
+
 export async function logout() {
-    await axios.post("http://localhost:5005/api/users/logout")
+    await axios.post('http://localhost:5005/api/users/logout', 
+                    null, 
+                    { withCredentials: true });
     
 }
 
@@ -75,15 +131,28 @@ export async function createItem(item: ItemInput): Promise<Item> {
 export async function completeItem(itemId: string) {
     try {
         console.log(itemId);
-        const response = await axios.patch("http://localhost:5005/api/items" + itemId);
+        const response = await axios.patch(
+            `http://localhost:5005/api/items/${itemId}`,
+            { isDone: true },
+            { withCredentials: true }
+        );
         return response.data;
-     
     } catch (error) {
-        console.error("Error complete item", error);
+        console.error("Error completing item", error);
         throw error;
     }
 }
 
 export async function deleteItem(itemId: string) { 
-    await axios.delete("http://localhost:5005/api/items" + itemId);
+    try {
+        console.log(itemId);
+        const response = await axios.delete(
+            "http://localhost:5005/api/items/" + itemId, 
+            { withCredentials: true });
+        return response.data;
+     
+    } catch (error) {
+        console.error("Error delete item", error);
+        throw error;
+    }
 }

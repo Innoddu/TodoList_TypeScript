@@ -3,8 +3,10 @@ import {useForm} from "react-hook-form";
 import {User} from "../models/user";
 import {SignUpCredentials} from "../network/item_api";
 import * as ItemApi from "../network/item_api";
-import {Modal, Form, Button} from "react-bootstrap";
+import {Modal, Form, Button, Alert} from "react-bootstrap";
 import TextInputField from "./form/TextInputField";
+import axios from "axios";
+import { ConflictError } from "../errors/http_errors";
 
 interface SignUpModalProps {
     onDismiss: () => void,
@@ -13,16 +15,22 @@ interface SignUpModalProps {
 
 const SignUpModal = ({ onDismiss, onSignUpSuccesful } : SignUpModalProps) => {
     const { register, handleSubmit, formState: {errors, isSubmitting} } = useForm<SignUpCredentials>();
+    const [errorText, seterrorText] = useState<string | null>(null);
 
     async function onSubmit(credentials: SignUpCredentials) {
         try {
+   
             const newUser = await ItemApi.signUp(credentials);
             onSignUpSuccesful(newUser);
         } catch (error) {
-
-            console.error(error);
+            if (error instanceof ConflictError) {
+                seterrorText(error.message);
+            } else {
+                console.error(error);    
+            }
         }
     }
+    
     const CustomModalHeader: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
         <Modal.Header closeButton {...({} as any)}>{children}</Modal.Header>
     )
@@ -32,6 +40,12 @@ const SignUpModal = ({ onDismiss, onSignUpSuccesful } : SignUpModalProps) => {
                    <Modal.Title>Sign Up</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                {
+                    errorText &&
+                    <Alert variant="danger">
+                        {errorText}    
+                    </Alert>
+                }
                 <Form onSubmit={handleSubmit(onSubmit)}>
                         <TextInputField
                             name="username"

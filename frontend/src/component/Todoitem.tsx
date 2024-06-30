@@ -38,11 +38,12 @@ const Todoitem = ( { item, onUpdate, onDelete, onComplete, newItemId } : TodoIte
 
     const onChangeDelete = () => {
         const confirmDelete = window.confirm(`Are you sure to delete "${content}" ?`);
+
         if (confirmDelete){
             onDelete(_id);
         }
-        
     }
+    
     const onChangeComplete = () => {
         if (!isDone) {
             window.confirm(`You should complete "${content}" task!`);
@@ -52,6 +53,7 @@ const Todoitem = ( { item, onUpdate, onDelete, onComplete, newItemId } : TodoIte
             // onComplete(_id);
         }
     }
+    
     return (
         <div className={`Todoitem-container ${_id === newItemId ? 'new-item' : ''}`}>
             <div ref={itemRef} className={`Todoitem ${isCompleting ? 'completing' : ''}`}>
