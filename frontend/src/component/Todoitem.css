@@ -6,7 +6,7 @@
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 20px;
-    border-bottom: 1px solid rgb(240,240,240);
+    border-bottom: 1px solid rgb(113, 109, 109);
     border-radius: 15px;
     /* background-image: linear-gradient(to top, #bbbbbb 0%, #634494 100%); */
     /* background-color: rgb(189, 200, 211); */
@@ -18,7 +18,7 @@
 }
 
 .Todoitem .checkbox_col {
-    width: 20px;
+    width: 30px;
 }
 
 .Todoitem .title_col {
@@ -42,14 +42,27 @@
 
 }
 .Todoitem .btn_col_complete button:hover {
-    background-color: #7e8fe4;
+    background-color: #485bb9;
 }
+/* disabled 상태에서의 스타일 (hover 효과 무시) */
+.btn_col_complete button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    pointer-events: none; /* 마우스 이벤트 무시 */
+  }
 
 .Todoitem .btn_col_delete button:hover {
-    background-color: rgb(188, 95, 211);
+    background-color: rgb(119, 50, 136);
 }
-.Todoitem.completing {
+
+/* .Todoitem.completing {
     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    transform: translateX(100%);
+    opacity: 0;
+} */
+
+.Todoitem.deleted {
+    transition: transform 1s ease-out, opacity 0.5s ease-out;
     transform: translateX(100%);
     opacity: 0;
 }
@@ -64,4 +77,9 @@
 .new-item {
     max-height: 0;
     opacity: 0;
+  }
+
+  .Todoitem.completed {
+    background-color: rgb(42, 117, 52);
+    border-color: rgb(16, 57, 13);
   }

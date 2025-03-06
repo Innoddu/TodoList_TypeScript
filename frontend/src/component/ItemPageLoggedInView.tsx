@@ -3,7 +3,6 @@ import  * as ItemApi from '../network/item_api'
 import Header from '../component/Header'
 import Writer from '../component/Writer'
 import Todolist from '../component/Todolist'
-import axios from 'axios';
 import  { ItemInput } from '../network/item_api'
 import { Item as ItemModel } from '../models/item'
 
