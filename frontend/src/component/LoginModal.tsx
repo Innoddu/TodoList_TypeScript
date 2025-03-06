@@ -35,7 +35,7 @@ const LoginModal = ({ onDismiss, onLogInSuccessful }: LoginModalProps ) => {
         <Modal.Header closeButton {...({} as any)}>{children}</Modal.Header>
     )
     return (
-        <Modal show onHide={onDismiss}>
+        <Modal className="custom-modal" show onHide={onDismiss}>
             <Modal.Header closeButton {...({} as any)}>
                    <Modal.Title>Log In</Modal.Title>
             </Modal.Header>

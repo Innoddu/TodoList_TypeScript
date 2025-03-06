@@ -40,10 +40,8 @@ const auth_1 = require("./midleware/auth");
 const app = (0, express_1.default)();
 const cors = require('cors');
 const corsOptions = {
-    origin: "http://localhost:3000", // 허용할 도메인 설정
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-    optionsSuccessStatus: 204
+    origin: 'http://localhost:3001',
+    credentials: true, // 클라이언트에서 withCredentials가 true여야 함
 };
 app.use(cors(corsOptions));
 app.use((0, morgan_1.default)("dev"));

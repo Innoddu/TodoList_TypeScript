@@ -14,11 +14,11 @@ import { requiresAuth } from "./midleware/auth";
 const app = express();
 const cors = require('cors');
 const corsOptions = {
-    origin: 'http://localhost:3000',
-    credentials: true  // 이 옵션이 필요한 경우, 클라이언트에서도 withCredentials를 설정해야 합니다.
-  }
+    origin: 'http://localhost:3001', 
+    credentials: true, // 클라이언트에서 withCredentials가 true여야 함
+  };
   
-  app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 
 app.use(express.json());

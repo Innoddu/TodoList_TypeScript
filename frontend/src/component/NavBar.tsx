@@ -2,6 +2,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { User } from "../models/user"
 import NavBarLoggedInView from "./NavBarLoggedInView"
 import NavBarLoggedOutView from "./NavBarLoggedOutView";
+import { useState } from "react";
 import './NavBar.css'
 interface NavBarProps {
     loggedInUser: User | null,
@@ -11,8 +12,9 @@ interface NavBarProps {
 }
 
 const NavBar = ({ loggedInUser, onSignUpClicked, onLoginClicked, onLogoutSuccessful} : NavBarProps) => {
+
     return (
-        <Navbar className="custom-navbar" sticky="top" >
+        <Navbar className="custom-navbar" sticky="top">
             <Container>
                 <Navbar.Brand>
                     ToDoList

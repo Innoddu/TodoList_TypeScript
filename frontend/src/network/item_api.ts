@@ -6,7 +6,7 @@ import { ConflictError, UnauthorizedError } from "../errors/http_errors";
 
 // Heroku base url
 // const BASE_URL = 'http://localhost:5005';
-const BASE_URL = 'https://app-todolist-395378bec3eb.herokuapp.com' || 'http://localhost:5005/api/items';
+const BASE_URL = 'https://app-todolist-395378bec3eb.herokuapp.com' || 'http://localhost:5005';
 
 
 

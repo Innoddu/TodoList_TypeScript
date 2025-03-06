@@ -5,8 +5,8 @@ import {SignUpCredentials} from "../network/item_api";
 import * as ItemApi from "../network/item_api";
 import {Modal, Form, Button, Alert} from "react-bootstrap";
 import TextInputField from "./form/TextInputField";
-import axios from "axios";
 import { ConflictError } from "../errors/http_errors";
+import "./SignUp.css";
 
 interface SignUpModalProps {
     onDismiss: () => void,
@@ -35,7 +35,7 @@ const SignUpModal = ({ onDismiss, onSignUpSuccesful } : SignUpModalProps) => {
         <Modal.Header closeButton {...({} as any)}>{children}</Modal.Header>
     )
     return (
-        <Modal show onHide={onDismiss}>
+        <Modal show onHide={onDismiss} className="custom-modal">
             <Modal.Header closeButton {...({} as any)}>
                    <Modal.Title>Sign Up</Modal.Title>
             </Modal.Header>
@@ -48,6 +48,7 @@ const SignUpModal = ({ onDismiss, onSignUpSuccesful } : SignUpModalProps) => {
                 }
                 <Form onSubmit={handleSubmit(onSubmit)}>
                         <TextInputField
+                            
                             name="username"
                             label="Username"
                             type="text"

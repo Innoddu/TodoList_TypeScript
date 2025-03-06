@@ -1,13 +1,13 @@
 @font-face {
-  font-family: '양진체';
-  src: url('https://fastly.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
-  font-weight: normal;
+  font-family: 'LINESeedKR-Bd';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+  font-weight: 700;
   font-style: normal;
 }
 
 
 body {
-  font-family: '양진체';
+  font-family: 'LINESeedKR-Bd';
   background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   margin-bottom: 1200px;
   
