@@ -1,9 +1,10 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { User } from "../models/user"
+import { Link } from "react-router-dom";
 import NavBarLoggedInView from "./NavBarLoggedInView"
 import NavBarLoggedOutView from "./NavBarLoggedOutView";
-import { useState } from "react";
-import './NavBar.css'
+import '../style/NavBar.css'
+
 interface NavBarProps {
     loggedInUser: User | null,
     onSignUpClicked: () => void,
@@ -16,7 +17,7 @@ const NavBar = ({ loggedInUser, onSignUpClicked, onLoginClicked, onLogoutSuccess
     return (
         <Navbar className="custom-navbar" sticky="top">
             <Container>
-                <Navbar.Brand>
+                 <Navbar.Brand as={Link} to="/">
                     ToDoList
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="main-navbar" />

@@ -1,0 +1,24 @@
+.navText {
+    display: flex;
+    gap: 20px;
+}
+
+.navText Button {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #7e8fe4;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.navText Button:hover {
+    background-color: #1c2a6e;
+}
+
+.username-box {
+    border: 3px solid rgb(36, 102, 202);      
+    padding: 5px 7px;        
+    border-radius: 4px;         
+
+   
+  }

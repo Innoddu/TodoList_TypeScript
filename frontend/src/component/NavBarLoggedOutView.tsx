@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import "./NavBarLoggedOutViewProps.css"
+import "../style/NavBarLoggedOutViewProps.css"
 
 
 interface NavBarLoggedOutViewProps {

@@ -1,4 +1,4 @@
-import './Writer.css'
+import '../style/Writer.css'
 import React, {useState, useRef, ChangeEvent, KeyboardEvent} from 'react'
 
 interface WriterProps {

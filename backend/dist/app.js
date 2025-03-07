@@ -39,9 +39,17 @@ const connect_mongo_1 = __importDefault(require("connect-mongo"));
 const auth_1 = require("./midleware/auth");
 const app = (0, express_1.default)();
 const cors = require('cors');
+const allowedOrigins = ['https://create-your-todolist-2675eb259777.herokuapp.com/', 'http://localhost:3010'];
 const corsOptions = {
-    origin: 'http://localhost:3001',
-    credentials: true, // 클라이언트에서 withCredentials가 true여야 함
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
 };
 app.use(cors(corsOptions));
 app.use((0, morgan_1.default)("dev"));

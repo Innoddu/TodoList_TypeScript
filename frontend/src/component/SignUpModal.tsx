@@ -6,7 +6,7 @@ import * as ItemApi from "../network/item_api";
 import {Modal, Form, Button, Alert} from "react-bootstrap";
 import TextInputField from "./form/TextInputField";
 import { ConflictError } from "../errors/http_errors";
-import "./SignUp.css";
+import "../style/SignUp.css";
 
 interface SignUpModalProps {
     onDismiss: () => void,

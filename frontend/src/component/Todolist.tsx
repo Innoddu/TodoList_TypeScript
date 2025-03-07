@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { Item as ItemModel} from "../models/item";
 import Todoitem from './Todoitem';
-import './Todolist.css'
+import '../style/Todolist.css'
 
 interface TodoItemProps {
     item: ItemModel[];

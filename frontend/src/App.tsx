@@ -1,24 +1,21 @@
 import './App.css';
-import React, { useState, useRef, useEffect } from 'react'
-import Header from './component/Header'
-import Writer from './component/Writer'
-import Todolist from './component/Todolist'
+import React, { useState, useEffect } from 'react'
 import SignUpModal from "./component/SignUpModal"
 import LoginModal from "./component/LoginModal"
 import NavBar from "./component/NavBar"
-import  { ItemInput } from './network/item_api'
+import AppRoutes from '../src/routes/route';
 import  * as ItemApi from './network/item_api'
-import { Item as ItemModel } from './models/item'
-import axios from 'axios';
-import ItemPageLoggedInView from "./component/ItemPageLoggedInView"
 import { User } from "./models/user"
-import ItemPageLoggedOutView from './component/ItemPageLoggedOutPage';
+import { BrowserRouter, useNavigate } from "react-router-dom";
+import LoadingSpinner from '../src/component/LoadingSpinner'; 
 
 function App() {
 
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
   const [showSignUpModal, setshowSignUpModal] = useState(false);
   const [showLoginModal, setshowLoginModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect( () => {
     async function fetchLoggedInUser() {
@@ -28,28 +25,30 @@ function App() {
         setLoggedInUser(user);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchLoggedInUser();
   }, []);  
 
-
+  
+    const onLogoutSuccessful = () => {
+      setLoggedInUser(null);
+      navigate("/"); 
+    };
   return (
     <div>
         <NavBar
           loggedInUser={loggedInUser}
           onLoginClicked={() => setshowLoginModal(true)}
           onSignUpClicked={() => setshowSignUpModal(true)}
-          onLogoutSuccessful={() => setLoggedInUser(null)}
+          onLogoutSuccessful={onLogoutSuccessful}
         />
 
-      <div className="App">
-        {
-          loggedInUser 
-          ? <ItemPageLoggedInView/>
-          : <ItemPageLoggedOutView/>
-        }
-      </div>
+        <div className="App">
+           <AppRoutes loggedInUser={Boolean(loggedInUser)} />
+        </div>
       <>
  
       </>
