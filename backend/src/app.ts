@@ -15,19 +15,22 @@ const app = express();
 const cors = require('cors');
 const allowedOrigins = [
     'https://create-your-todolist-75c62e8accfe.herokuapp.com',
+    'https://create-your-todolist-75c62e8accfe.herokuapp.com/',
     'http://localhost:3010'
   ];
-const corsOptions = {
-    origin: function(origin: any, callback: any) {
-        console.log("Request Origin:", origin);
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true,
-};
+  
+  const corsOptions = {
+      origin: function(origin: any, callback: any) {
+          console.log("Request Origin:", origin);
+          if (!origin || allowedOrigins.includes(origin)) {
+              callback(null, true);
+          } else {
+              callback(new Error('Not allowed by CORS: ' + origin));
+          }
+      },
+      credentials: true,
+  };
+    
   
 app.use(cors(corsOptions));
 app.use(morgan("dev"));
