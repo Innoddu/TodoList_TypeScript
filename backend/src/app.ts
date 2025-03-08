@@ -13,7 +13,7 @@ import { requiresAuth } from "./midleware/auth";
 
 const app = express();
 const cors = require('cors');
-const allowedOrigins = ['https://create-your-todolist-2675eb259777.herokuapp.com/', 'http://localhost:3010'];
+const allowedOrigins = ['https://create-your-todolist-75c62e8accfe.herokuapp.com/', 'http://localhost:3010'];
 const corsOptions = {
     origin: function(origin: any, callback: any) {
         console.log("Request Origin:", origin);
