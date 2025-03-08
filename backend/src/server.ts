@@ -1,6 +1,5 @@
 import app from './app';
 import "dotenv/config";
-import express, { Request, Response} from "express";
 import mongoose from "mongoose";
 import env from './util/validateEnv';
 
