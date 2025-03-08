@@ -4,7 +4,7 @@
   "description": "<div align=\"center\">   <h1> ToDo List </h1> </div> <br> <p align=\"center\">  <img width=\"480\" alt=\"Screenshot 2024-06-20 at 11 37 43 AM Large\" src=\"https://github.com/Innoddu/TodoList_TypeScript/assets/70001944/bc5ea740-c6ca-47c3-af40-18fe706258d0\"> </p> <div align=\"center\">   <h1>Key Features</h1> </div> <div align=\"center\">   <ul style=\"list-style-type: none; padding: 0;\">    <div align=\"center\">     <li>Understanding the Frontend side with HTML, CSS, Javascript, ReactJS, and TypeScript  </li>      <li>Understanding the Backend side with Node.js, Express, MongoDB </li>     <li>Implemented CRUD (Create, Read, Update, Delete) </li>    </div>   </ul> </div>",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/dist/app.js",
+    "start": "node backend/dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,12 +14,33 @@
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.3.0"
+    "react-router-dom": "^7.3.0",
+    "bcrypt": "^5.1.1",
+    "connect-mongo": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "envalid": "^8.0.0",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.4.1",
+    "morgan": "^1.10.0",
+    "typescript": "^5.4.4"
   },
   "devDependencies": {
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/react-router-dom": "^5.3.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "@eslint/js": "^9.4.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "@types/express-session": "^1.18.0",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.14.2",
+    "eslint": "^8.56.0",
+    "globals": "^15.4.0",
+    "nodemon": "^3.1.3",
+    "ts-node": "^10.9.2",
+    "typescript-eslint": "^7.13.0"
   }
 }
