@@ -4,9 +4,7 @@
   "description": "<div align=\"center\">   <h1> ToDo List </h1> </div> <br> <p align=\"center\">  <img width=\"480\" alt=\"Screenshot 2024-06-20 at 11 37 43 AM Large\" src=\"https://github.com/Innoddu/TodoList_TypeScript/assets/70001944/bc5ea740-c6ca-47c3-af40-18fe706258d0\"> </p> <div align=\"center\">   <h1>Key Features</h1> </div> <div align=\"center\">   <ul style=\"list-style-type: none; padding: 0;\">    <div align=\"center\">     <li>Understanding the Frontend side with HTML, CSS, Javascript, ReactJS, and TypeScript  </li>      <li>Understanding the Backend side with Node.js, Express, MongoDB </li>     <li>Implemented CRUD (Create, Read, Update, Delete) </li>    </div>   </ul> </div>",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "build": "tsc",
-    "dev": "nodemon src/server.ts",
+    "start": "node /backend/dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
