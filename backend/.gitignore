@@ -114,10 +114,7 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist/controllers
-dist/models
-dist/routes
-dist/util
+/dist
 
 # Gatsby files
 .cache/
